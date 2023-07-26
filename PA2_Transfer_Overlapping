@@ -1,0 +1,26 @@
+CLR PSW.3
+CLR PSW.4 //program status word
+//select reg bank 0 
+
+
+MOV R0,#30h
+MOV R1,#35h
+MOV R2,#07h
+MOV A,R2
+ADD A,R0
+MOV R0,A
+MOV A,R2
+ADD A,R1
+MOV R1,A
+
+DEC R0
+DEC R1
+
+L1:MOV A,@R0
+MOV @R1,A
+DEC R0
+DEC R1
+DJNZ R2,L1
+END
+
+
