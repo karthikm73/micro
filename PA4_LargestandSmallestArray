@@ -1,0 +1,36 @@
+Largest 
+MOV R0,#40h
+MOV R1,#6h
+MOV A,@R0
+
+Loop : INC R0
+       MOV 50h,@R0
+	   CJNE A,50h,next
+	   SJMP next1
+	 
+next : JNC next1
+			MOV A,@R0
+
+next1 : djnz R1,Loop
+MOV 50h,A
+
+END
+
+Smallest
+MOV R0,#40h
+MOV R1,#6h
+MOV A,@R0
+
+Loop : INC R0
+       MOV 50h,@R0
+	   CJNE A,50h,next
+	   SJMP next1
+	 
+next : JC next1
+			MOV A,@R0
+
+next1 : djnz R1,Loop
+MOV 50h,A
+loop1 :sjmp loop1
+
+END
