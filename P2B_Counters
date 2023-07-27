@@ -1,0 +1,82 @@
+1.	Write an assembly language program to implement (display) an eight bit  UP, binary (hex) counter on watch window(ONCE/ CONTINUOUSLY)
+
+up:mov a,#00 		
+back: acall delay  		; (back: MOV 30h,a for counting in Internal memory )
+inc a 		
+jnz back
+sjmp up                  ;( terminate the program here THIS PGM  WILL EXECUTE 
+                   ; only once)
+delay: mov r1,#055h
+decr1: mov r2,#066h
+decr: mov r3,#0FFh
+djnz r3,$
+djnz r2,decr
+djnz r1,decr1
+ret
+end
+
+
+2.	Write an assembly language program to implement (display) an eight bit  DOWN binary (hex) DOWN on watch window( ONCE/ CONTINUOUSLY)
+
+down: mov a,#0FFH
+back: acall delay
+DEC a 		
+jnz back
+mov a,#00H
+acall delay
+sjmp down	;( terminate the program here THIS PGM  WILL EXECUTE 
+               ; only once)
+
+delay: mov r1,#055h
+decr1: mov r2,#066h
+decr: mov r3,#0FFh
+djnz r3,$
+djnz r2,decr
+djnz r1,decr1
+ret
+end
+
+
+3.	Write an assembly language program to implement (display) an eight bit decimal UP counter on watch window( ONCE/ CONTINUOUSLY)
+(To understand this pgm remove delay pgm and comment acall delay and press F11 , you will understand step wise)
+
+up: mov a,#00h 			
+back: acall delay
+add a,#01h 			
+da a 					;decimal adjust accumulator
+jnz back
+sjmp up;( terminate the program here THIS PGM  WILL EXECUTE 
+                     ; only once)
+delay: mov r1,#055h
+decr1: mov r2,#066h
+decr: mov r3, #0ffh
+djnz r3,$
+djnz r2, decr
+djnz r1, decr1
+ret
+end
+
+
+4.	Write an assembly language program to implement (display) an eight bit  Decimal Down counter on watch window( ONCE/ CONTINUOUSLY)
+
+down: mov a,#99h 			
+back: acall delay
+add a,#99h 			
+da a 					;decimal adjust accumulator
+jnz back
+mov a,#00h
+acall delay
+sjmp down;( terminate the program here THIS PGM  WILL EXECUTE 
+                     ; only once)
+delay: mov r1,#0aah
+decr1: mov r2,#0bbh
+decr: mov r3, #0ffh
+djnz r3,$
+djnz r2, decr
+djnz r1, decr1
+ret
+end
+RESULT: Accumulator A is incremented in BCD from 99,98,.....00...99,98...00 (Continuously)
+
+
+
