@@ -1,0 +1,10 @@
+Mov a,21h
+Anl a,22h //logically AND the contents of A and 22h
+Mov 30h,a
+Mov a,21h
+Orl a,22h // logically OR the contents of A and 22h
+Mov 31h,a
+Mov a,21h
+Xrl a,22h // logically XOR the contents of A and 22h
+Mov 32h,a
+End
