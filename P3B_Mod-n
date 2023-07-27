@@ -1,0 +1,43 @@
+10.	Design MOD - N DOWN Counter CONTINUOUSLY
+
+INIT EQU 19H
+DOWN:MOV A,#INIT	;load the accumulator with MODN-1 Value for down cntng ;dnt use bracket ( Just give values, Ex: MOD 20 : 20-1 =19H)
+BACK: LCALL DELAY 	;call delay 
+ADD A,#99H			; decrement accumulator by 1 
+DA A
+CJNE A,#00H,back     ;compare accumulator with 00H if not equal jump up 
+LCALL DELAY
+MOV A,#00H
+SJMP down;( terminate the program here THIS PGM  WILL EXECUTE 
+             ; only once)
+DELAY: MOV R0,#099H	; load r0 by FFH 
+BACK1: MOV R1,#0aaH 	; load r1 by FFH 
+BACK2: MOV R2,#0FFH 	; load r2 by FFH 
+HERE: DJNZ R2,HERE	; decrement r2 if not equal to zero jump here 
+DJNZ R1, BACK2		; decrement r1 if not equal to zero jump Back 
+DJNZ R0,BACK1		;decrement r0 if not equal to zero jump Back1 
+RET
+END
+
+11.	Design MOD - N UP Counter CONTINUOUSLY at external memory location 
+
+MOV DPTR,#9000H
+up:MOV A, #00H 
+back:MOVX @DPTR, A
+ACALL DELAY 		;call delay 
+ADD A,#01H				
+DA A
+CJNE A,#(N)H,back   ;compare accumulator with 00H if not equal jump up 
+SJMP up               ;( terminate the program here THIS PGM WILL EXECUTE  
+	         ; only once)
+DELAY: MOV R0,#099H 	; load r0 by FFH 
+BACK1: MOV R1,#0aaH 	; load r1 by FFH 
+BACK2: MOV R2,#0FFH 	; load r2 by FFH 
+HERE: DJNZ R2,HERE	; decrement r2 if not equal to zero jump here 
+DJNZ R1, BACK2		;decrement r1 if not equal to zero jump Back 
+DJNZ R0,BACK1	;decrement r0 if not equal to zero jump Back1 
+RET
+END
+
+RESULT: Accumulator A is incremented 00, 01.... (N-1) (Continuously)
+
