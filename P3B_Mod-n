@@ -19,25 +19,23 @@ DJNZ R0,BACK1		;decrement r0 if not equal to zero jump Back1
 RET
 END
 
-11.	Design MOD - N UP Counter CONTINUOUSLY at external memory location 
+9.	Design MOD – N UP Counter CONTINUOUSLY
+		
+val equ 20h
+up:MOV A,#00H 		;load the accumulator with 00H
+back: LCALL DELAY 	;call delay 
+ADD A,#01H			; Add accumulator by 1 
+DA A				; Decimal Adjust After addition to get decimal value
+CJNE A,#val,back    		;compare A with MODN Value if not equal jump to up 
+SJMP up		;( terminate the program here This Pgm Will Execute only once)
 
-MOV DPTR,#9000H
-up:MOV A, #00H 
-back:MOVX @DPTR, A
-ACALL DELAY 		;call delay 
-ADD A,#01H				
-DA A
-CJNE A,#(N)H,back   ;compare accumulator with 00H if not equal jump up 
-SJMP up               ;( terminate the program here THIS PGM WILL EXECUTE  
-	         ; only once)
-DELAY: MOV R0,#099H 	; load r0 by FFH 
+DELAY: MOV R0,#099H	; load r0 by FFH 
 BACK1: MOV R1,#0aaH 	; load r1 by FFH 
 BACK2: MOV R2,#0FFH 	; load r2 by FFH 
 HERE: DJNZ R2,HERE	; decrement r2 if not equal to zero jump here 
 DJNZ R1, BACK2		;decrement r1 if not equal to zero jump Back 
-DJNZ R0,BACK1	;decrement r0 if not equal to zero jump Back1 
+DJNZ R0,BACK1		;decrement r0 if not equal to zero jump Back1 
 RET
 END
 
-RESULT: Accumulator A is incremented 00, 01.... (N-1) (Continuously)
 
