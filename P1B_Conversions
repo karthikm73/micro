@@ -1,0 +1,91 @@
+a. Program to convert BCD to ASCII
+mov r1,#02h
+mov r0,#40h
+mov a,@r0
+mov 0f0h,a
+anl a,#0fh
+back: add a,#30h
+ inc r0
+ mov @r0,a
+ djnz r1,next
+ sjmp loop
+ next: mov a,0f0h
+ anl a,#0f0h
+ swap a //exchange higher nibble of A with lower nibble
+ sjmp back
+ loop :sjmp loop
+end
+
+ Output:
+Before execution:
+40: 12
+After execution:
+40:12 32 31
+
+
+b. Program to convert ASCII to Decimal
+mov r0,#30h
+mov a,@r0
+sub a,#30h
+inc r0
+mov @r0,a
+end
+Output:
+Before execution:
+30: 62
+After execution:
+30:62 32
+c. Program to convert Decimal to ASCII
+mov r0,#30h
+mov a,@r0
+add a,#30h
+inc r0
+mov @r0,a
+end
+Output:
+Before execution:
+30: 32
+After execution:
+
+30:32 62
+
+
+d. Program to convert Hexadecimal to Decimal
+mov r0,#30h
+mov a,@r0
+mov 0f0h,#0ah
+div ab
+mov r1,0f0h
+mov 0f0h,#0ah
+div ab
+mov 40h,a
+mov a,0f0h
+swap a
+orl a,r1
+mov 41h,a
+end
+Output:
+Before execution:
+30: 62
+After execution:
+30:62 98
+
+
+
+e. Program to convert Decimal to Hexadecimal
+mov r0,#30h
+mov a,@r0
+mov 0f0h,#10h
+div ab
+mov r1,0f0h
+mov 0f0h,#0ah
+mul ab
+add a,r1
+inc r0
+mov @r0,a
+end
+Output:
+Before execution:
+30: 62
+After execution:
+30:62 3E
