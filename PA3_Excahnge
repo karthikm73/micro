@@ -1,0 +1,25 @@
+c. Write an assembly language program to exchange the block of data bytes
+present in internal memory
+Mov r0,#30h
+Mov r1,#40h
+Mov r2,#5
+ Loop : mov a,@r0
+xch a,@r1 //exchange the contents of A and 40h
+mov @r0,a
+inc r0
+inc r1
+djnz r2,loop
+end
+
+d. Program to exchange the contents of two external memory locations.
+Mov dptr,#9000h //initialize dptr with the external address 9000h
+Movx a,@dptr //copy the data from the external address to A
+Mov r0,a
+Inc dptr
+Movx a,@dptr
+Xch a,r0
+Movx @dptr,a
+Dec 82h
+Mov a,r0
+Movx @dptr,a
+ Loop : sjmp
