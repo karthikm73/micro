@@ -1,0 +1,26 @@
+13.	ALP TO MOD-N UP&DOWN COUNTER on WATCH WINDOW CONTINUOUSLY
+
+up:MOV A,#00H 		;load the accumulator with 00H 
+back:LCALL DELAY	;call delay 
+ADD A,#01H    ; increment accumulator by 1 
+DA A
+CJNE A,#(N)H,back       ;compare accumulator with 40h if not equal jump 
+;up
+down:ADD A,#99H
+DA A
+LCALL DELAY
+CJNE A,#00H, down
+SJMP up;( terminate the program here THIS PGM WILL EXECUTE  
+	; only once
+DELAY:MOV R0,#099H 	; load r0 by FFH 
+BACK1:MOV R1,#0aaH 	; load r1 by FFH 
+BACK2:MOV R2,#0FFH 	; load r2 by FFH 
+HERE:DJNZ R2,HERE 	; decrement r2 if not equal to zero jump here 
+DJNZ R1, BACK2	;decrement r1 if not equal to zero jump Back 
+DJNZ R0,BACK1	;decrement r0 if not equal to zero jump Back1 
+RET			;return to main
+END 				
+
+RESULT: A: 0 ......N-1 ......0 CONTINUOUSLY
+
+
