@@ -7,16 +7,16 @@ Add a,@r0
 Jnc next //jump to next if there is no carry
 Inc r1
  next : inc r0
-Mov @r0,a
+Mov @r0,a //LSB OF THE RESULT
 Inc r0
 Mov a,r1
-Mov @r0,a
+Mov @r0,a //MSB OF THE RESULT
 End
 
 Sub 
 same only change add to subb
 
-16 bit
+16 bit ADDITION
 Clr c //clear the carry flag
 mov r0,#30h
 mov r1,#40h
@@ -30,3 +30,70 @@ addc a,@r1 //add contents of A and address in r1 with carry
 
 mov 51h,a
 end
+
+16 BIT SUB
+Clr c
+mov r0,#30h
+mov r1,#40h
+mov a,@r0
+subb a,@r1
+mov 50h,a
+Inc r0
+Inc r1
+mov a,@r0
+subb a,@r1
+mov 51h,a
+end
+
+
+8 BIT MULTIPLICATION 
+Mov r0,#30h
+Mov a,@r0
+Inc r0
+Mov b,@ro
+Mul ab //multiply the contents of A and B registers
+Inc r0
+Mov @r0,a
+Inc r0
+Mov @r0,b
+End
+
+8 BIT DIVISION
+Mov r0,#30h
+Mov a,@r0
+Inc r0
+Mov b,@ro
+DIV ab // Divide the contents of A by B
+Inc r0
+Mov @r0,a
+Inc r0
+Mov @r0,b
+End
+
+SQUARE
+Mov r0,#30h
+Mov a,@r0
+Mov b,a
+Mul ab
+Mov 50h,a
+Mov 51h,b
+End
+
+CUBE
+Mov r1,#30h
+Mov a,@r1
+Mov 0f0h,a
+Mul ab
+Mov r3,0f0h
+Mov 0f0h,@r1
+Mul ab
+Mov 50h,a
+Mov r5,0f0h
+Mov 0f0h,@r1
+Mov a,r3
+Mul ab
+Add a,r5
+Mov 51h,a
+Mov 52h,0f0h
+End
+
